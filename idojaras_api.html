@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <title>OpenWeather API v0.1</title>
+</head>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    function getWeather() {
+      // HTTP-kérés az OpenWeather API-hoz
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=Tatabánya&units=metric&appid=000260eb4047455556e5ecfc96c310bc");
+      xhr.onload = function() {
+        // Ha a kérés sikeres, akkor kezeljük az adatokat
+        if (xhr.status === 200) {
+          // A kérés eredménye egy JSON objektum
+          var data = JSON.parse(xhr.responseText);
+          // Írjuk ki az adatokat a weboldalra
+          document.getElementById("weather").innerHTML =
+            "Hőmérséklet: " + data.main.temp + " °C<br>" +
+            "Párásság: " + data.main.humidity + "%<br>" +
+            "Szélsebesség: " + data.wind.speed + " km/h<br>";
+        } else {
+          // Ha a kérés sikertelen, akkor hibaüzenetet írjunk ki
+          document.getElementById("weather").innerHTML = "Hiba: " + xhr.statusText;
+        }
+      };
+      xhr.send();
+    }
+
+    // Hívjuk meg a getWeather() függvényt az oldal betöltésekor
+    $(document).ready(function() {
+      getWeather();
+    });
+  </script>
+  <div id="weather"></div>
+</body>
+</html>
+
