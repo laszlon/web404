@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <title>OpenWeather API v0.1</title>
+  <title>OpenWeather API v0.2</title>
 </head>
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
+    window.appid = "000260eb4047455556e5ecfc96c310bc";
+    
     function getWeather() {
       // HTTP-kérés az OpenWeather API-hoz
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=Tatabánya&units=metric&appid=000260eb4047455556e5ecfc96c310bc");
+      xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=Tatabánya&units=metric&appid=" + window.appid);
       xhr.onload = function() {
         // Ha a kérés sikeres, akkor kezeljük az adatokat
         if (xhr.status === 200) {
